@@ -5,20 +5,20 @@
  
 # Corrige un problème lors de l'utilisation du scp et de WinSCP
 # http://winscp.net/forum/viewtopic.php?t=1510
-if [ "\$TERM" != "dumb" ]; then
+if [ "$TERM" != "dumb" ]; then
         # Si un groupe Admin existe alors on active le dynmotd
-        \$( which id ) | grep 'admin' > /dev/null
-        RETURN=\$?
-        if [ \$RETURN = 0 ]; then
+        $( which id ) | grep 'admin' > /dev/null
+        RETURN=$?
+        if [ $RETURN = 0 ]; then
                 /usr/local/bin/dynmotd;
         # Si root se connecte on active le dynmotd
-        elif [ \$EUID = 0 ]; then
+        elif [ $EUID = 0 ]; then
                 /usr/local/bin/dynmotd;
         # Sinon on affiche un message "standard" pour les simples utilisateurs
         else
                 echo ""
                 echo ""
-                echo "---> Welcome \$USER on \$(hostname)"
+                echo "---> Welcome $USER on $(hostname)"
                 echo ""
                 echo "###########################################################################"
                 echo "#                                                                         #"
